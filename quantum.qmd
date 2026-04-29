@@ -1,0 +1,7 @@
+---
+title: "Quantum Technology"
+---
+
+### Superconducting Device Development
+[Transition-edge sensors](https://en.wikipedia.org/wiki/Transition-edge_sensor) are a standard detector technology used in modern astronomy and cosmology instruments, and can also be used as [single-photon detectors](https://en.wikipedia.org/wiki/Single-photon_detector) for quantum information and other domains. A TES is a superconducting [bolometer](https://en.wikipedia.org/wiki/Bolometer) that operates at the edge of the superconducting transition, where its resistance is highly sensitive to changes in temperature. When coupled to an absorber, this makes it an extremely sensitive detector for photons and other particles. Typically, a SQUID ([superconducting quantum interference device](https://en.wikipedia.org/wiki/SQUID)) is used to read out the very small changes in electrical current through the TES that correlate to photon absorption. However, SQUIDs are complex devices, requiring multiple layers of superconducting thin films and complex fabrication processes, and they are not straightforward to multiplex.
+

@@ -1,19 +1,29 @@
 project:
   type: website
+  resources:
+    - "files/AK_CV_full.pdf"
+  #output-dir: docs
 
 website:
-  title: "adityakher.github.io"
+  title: "Aditya Kher"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      #- href: about.qmd
+      #  text: About
+      - href: quantum.qmd
+        text: Quantum
+      - href: defense.qmd
+        text: Defense
+      - href: cv.qmd
+        text: CV
 
 format:
   html:
     theme:
-      - cosmo
-      - brand
+      light: flatly
+      dark: darkly
     css: styles.css
     toc: true
 

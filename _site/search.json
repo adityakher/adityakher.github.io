@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "adityakher.github.io",
+    "title": "Aditya Kher, PhD",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "I’m an applied physicist and systems engineer with deep experience in both the quantum technology and aerospace & defense industries. I’ve spent my career on R&D projects ranging from quantum sensing and computing to satellite-based remote sensing systems. My expertise lies in applying rigorous, first-principles and systems-level thinking to problems in computational modeling, mission-critical algorithms, and advanced hardware development.\nI received my PhD in Applied Physics from Caltech, where I was a member of the sophomore class of NASA Space Technology Research Fellows. I had the privilege of shuttling between campus and the Jet Propulsion Laboratory for my research, which focused on novel superconducting sensor and amplifier technologies for applications in astronomy instrumentation. Prior to that, I also received an MS from Caltech, and a BS from the University of California, San Diego.\nCheck out the pages describing my work relevant to quantum and defense. You can also take a look at my full CV.\nWhen I’m not working, I’m typically reading The Economist, watching an arthouse film at an independent cinema, or doing some spirited driving in the canyons of Southern California.\nFeel free to reach out on LinkedIn if you want to talk physics, technology, movies, or anything else!"
   },
   {
     "objectID": "about.html",
@@ -12,5 +12,26 @@
     "title": "About",
     "section": "",
     "text": "About this site"
+  },
+  {
+    "objectID": "cv.html",
+    "href": "cv.html",
+    "title": "Curriculum Vitae",
+    "section": "",
+    "text": "Download CV (PDF)"
+  },
+  {
+    "objectID": "quantum.html",
+    "href": "quantum.html",
+    "title": "Quantum Technology",
+    "section": "",
+    "text": "Superconducting Device Development\nTransition-edge sensors are a standard detector technology used in modern astronomy and cosmology instruments, and can also be used as single-photon detectors for quantum information and other domains. A TES is a superconducting bolometer that operates at the edge of the superconducting transition, where its resistance is highly sensitive to changes in temperature. When coupled to an absorber, this makes it an extremely sensitive detector for photons and other particles. Typically, a SQUID (superconducting quantum interference device) is used to read out the very small changes in electrical current through the TES that correlate to photon absorption. However, SQUIDs are complex devices, requiring multiple layers of superconducting thin films and complex fabrication processes, and they are not straightforward to multiplex."
+  },
+  {
+    "objectID": "quantum.html#superconducting-device-development",
+    "href": "quantum.html#superconducting-device-development",
+    "title": "Quantum Technology",
+    "section": "",
+    "text": "slkdfjskldfj"
   }
 ]
