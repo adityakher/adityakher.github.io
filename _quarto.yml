@@ -16,7 +16,7 @@ website:
         text: Aerospace & Defense
     right:
       - href: files/AK_CV_full.pdf
-        text: CV
+        text: "Curriculum Vitae"
       - icon: linkedin
         href: https://www.linkedin.com/in/aditya-kher/
   page-footer:
