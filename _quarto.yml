@@ -1,7 +1,7 @@
 project:
   type: website
   resources:
-    - "files/AK_CV_full.pdf"
+    - "files/"
   output-dir: docs
 
 website:
@@ -11,9 +11,9 @@ website:
       - href: index.qmd
         text: Home
       - href: quantum.qmd
-        text: Quantum
+        text: Quantum Technology
       - href: defense.qmd
-        text: Defense
+        text: Aerospace & Defense
     right:
       - href: files/AK_CV_full.pdf
         text: CV
