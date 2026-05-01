@@ -1,1 +1,22 @@
 /* css styles */
+
+figure {
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Slightly more generous line height for body text */
+body {
+  line-height: 1.6;
+}
+
+/* More breathing room around headings */
+h2, h3 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Code blocks with a bit more padding */
+pre {
+  padding: 1rem;
+}

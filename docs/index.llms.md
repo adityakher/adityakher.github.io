@@ -1,0 +1,9 @@
+I’m an applied physicist and systems engineer with deep experience in both the quantum technology and aerospace & defense industries. I’ve spent my career on R&D projects ranging from [quantum sensing](https://en.wikipedia.org/wiki/Quantum_sensor) and [computing](https://en.wikipedia.org/wiki/Quantum_computing) to satellite-based [remote sensing](https://en.wikipedia.org/wiki/Remote_sensing) systems. My expertise lies in applying rigorous, first-principles and systems-level thinking to problems in computational modeling, mission-critical algorithms, and advanced hardware development.
+
+I received my PhD in Applied Physics from [Caltech](https://www.caltech.edu/), where I was a member of the sophomore class of [NASA Space Technology Research Fellows](https://web.archive.org/web/20170707172254mp_/https:/www.nasa.gov/directorates/spacetech/strg/2012_nstrf_kher.html). I had the privilege of shuttling between campus and the [Jet Propulsion Laboratory](https://www.jpl.nasa.gov/) for my research, which focused on novel [superconducting](https://en.wikipedia.org/wiki/Superconductivity) sensor and amplifier technologies for applications in astronomy instrumentation. Prior to that, I also received an MS from Caltech, and a BS from the [University of California, San Diego](https://ucsd.edu/).
+
+Check out the pages describing my work relevant to [quantum](quantum.llms.md) and [defense](defense.llms.md). You can also take a look at my full [CV](files/AK_CV_full.pdf).
+
+When I’m not working, I’m typically reading [The Economist](https://www.economist.com/), watching an arthouse film at an [independent cinema](https://revivalhub.com/), or doing some spirited driving in the canyons of Southern California.
+
+Feel free to reach out on [LinkedIn](https://www.linkedin.com/in/aditya-kher/) if you want to talk physics, technology, movies, or anything else!

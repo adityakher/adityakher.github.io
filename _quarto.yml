@@ -2,7 +2,7 @@ project:
   type: website
   resources:
     - "files/AK_CV_full.pdf"
-  #output-dir: docs
+  output-dir: docs
 
 website:
   title: "Aditya Kher"
@@ -10,14 +10,19 @@ website:
     left:
       - href: index.qmd
         text: Home
-      #- href: about.qmd
-      #  text: About
       - href: quantum.qmd
         text: Quantum
       - href: defense.qmd
         text: Defense
-      - href: cv.qmd
+    right:
+      - href: files/AK_CV_full.pdf
         text: CV
+      - icon: linkedin
+        href: https://www.linkedin.com/in/aditya-kher/
+  page-footer:
+    left: "© 2026 Aditya Kher"
+    right: "Built with [Quarto](https://quarto.org/)"
+  llms-txt: true
 
 format:
   html:
