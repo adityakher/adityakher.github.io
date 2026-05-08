@@ -1,0 +1,5 @@
+# Earth Observation AI/ML Pipeline
+
+*Status: in progress, last updated 5/7/2026*
+
+This project develops an end-to-end machine learning pipeline for satellite-based Earth observation, focused on land cover classification and vegetation analysis using Sentinel-2 imagery. A ResNet-18 convolutional neural network is trained on the EuroSAT dataset to achieve 96% classification accuracy across ten land cover classes, with GradCAM used to visualize the spatial features driving model predictions. Sentinel-2 scenes are retrieved programmatically via the Microsoft Planetary Computer STAC API, and normalized difference vegetation index (NDVI) is computed from spectral bands to characterize vegetation density and health. The pipeline is wrapped in an agentic interface built on the Anthropic Claude API, enabling natural-language access to imagery retrieval and analysis. The work spans the full applied-ML lifecycle: model training and interpretability, geospatial data engineering, and LLM-based tool orchestration.

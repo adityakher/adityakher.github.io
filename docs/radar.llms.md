@@ -1,0 +1,5 @@
+# Multistatic Radar Detection Performance Model
+
+*Status: in progress, last updated 5/7/2026*
+
+This project develops a Python framework for evaluating radar sensor performance against small uncrewed aerial systems (UAS), emphasizing the geometric advantages of multistatic (distributed) configurations over monostatic baselines. The framework implements monostatic and bistatic radar range equations, Shnidman’s detection probability model with Swerling target fluctuation, and an aspect-dependent target radar cross-section model built from composite canonical scatterers and calibrated to published Ku-band small-quadcopter measurements. Outputs include 2D probability-of-detection contours quantifying performance differences between a single monostatic radar and an N-node distributed configuration against low-RCS aspect-dependent targets. The study is motivated by the operational importance of counter-UAS radar and the intuition that geometric diversity in distributed sensor networks provides detection coverage that monostatic systems cannot match, particularly against targets with strong forward-aspect RCS suppression.
