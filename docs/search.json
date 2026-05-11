@@ -39,7 +39,7 @@
     "href": "radar.html",
     "title": "Multistatic Radar Detection Performance Model",
     "section": "",
-    "text": "Status: in progress, last updated 5/7/2026\nThis project develops a Python framework for evaluating radar sensor performance against small uncrewed aerial systems (UAS), emphasizing the geometric advantages of multistatic (distributed) configurations over monostatic baselines. The framework implements monostatic and bistatic radar range equations, Shnidman’s detection probability model with Swerling target fluctuation, and an aspect-dependent target radar cross-section model built from composite canonical scatterers and calibrated to published Ku-band small-quadcopter measurements. Outputs include 2D probability-of-detection contours quantifying performance differences between a single monostatic radar and an N-node distributed configuration against low-RCS aspect-dependent targets. The study is motivated by the operational importance of counter-UAS radar and the intuition that geometric diversity in distributed sensor networks provides detection coverage that monostatic systems cannot match, particularly against targets with strong forward-aspect RCS suppression."
+    "text": "Status: in progress, last updated 5/10/2026\nThis project develops a Python framework for evaluating radar sensor performance against small uncrewed aerial systems (UAS), emphasizing the geometric advantages of multistatic (distributed) configurations over monostatic baselines. The framework implements monostatic and bistatic radar range equations, Shnidman’s detection probability model with Swerling target fluctuation, and an aspect-dependent target radar cross-section model built from composite canonical scatterers and calibrated to published Ku-band small-quadcopter measurements. Outputs include 2D probability-of-detection contours quantifying performance differences between a single monostatic radar and an N-node distributed configuration against low-RCS aspect-dependent targets. The study is motivated by the operational importance of counter-UAS radar and the intuition that geometric diversity in distributed sensor networks provides detection coverage that monostatic systems cannot match, particularly against targets with strong forward-aspect RCS suppression."
   },
   {
     "objectID": "eoml.html",
@@ -47,5 +47,12 @@
     "title": "Earth Observation AI/ML Pipeline",
     "section": "",
     "text": "Status: in progress, last updated 5/7/2026\nThis project develops an end-to-end machine learning pipeline for satellite-based Earth observation, focused on land cover classification and vegetation analysis using Sentinel-2 imagery. A ResNet-18 convolutional neural network is trained on the EuroSAT dataset to achieve 96% classification accuracy across ten land cover classes, with GradCAM used to visualize the spatial features driving model predictions. Sentinel-2 scenes are retrieved programmatically via the Microsoft Planetary Computer STAC API, and normalized difference vegetation index (NDVI) is computed from spectral bands to characterize vegetation density and health. The pipeline is wrapped in an agentic interface built on the Anthropic Claude API, enabling natural-language access to imagery retrieval and analysis. The work spans the full applied-ML lifecycle: model training and interpretability, geospatial data engineering, and LLM-based tool orchestration."
+  },
+  {
+    "objectID": "radar.html#footnotes",
+    "href": "radar.html#footnotes",
+    "title": "Multistatic Radar Detection Performance Model",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nD. A. Shnidman, “Determination of required SNR values [radar detection],” in IEEE Transactions on Aerospace and Electronic Systems, vol. 38, no. 3, pp. 1059-1064, July 2002, doi: 10.1109/TAES.2002.1039422.↩︎\nM. I. Skolnik, Introduction to Radar Systems, 2nd ed. New York: McGraw-Hill, 1980.↩︎"
   }
 ]
