@@ -14,6 +14,10 @@ website:
         text: Quantum Technology
       - href: defense.qmd
         text: Aerospace & Defense
+      - text: Independent Projects
+        menu:
+          - text: Multistatic Radar Detection Performance Model
+            href: radar.qmd
     right:
       - href: files/AK_CV_full.pdf
         text: "Curriculum Vitae"

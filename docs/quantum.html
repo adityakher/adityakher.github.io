@@ -270,6 +270,17 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="./defense.html"> 
 <span class="menu-text">Aerospace &amp; Defense</span></a>
   </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-independent-projects" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Independent Projects</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-independent-projects">    
+        <li>
+    <a class="dropdown-item" href="./radar.html">
+ <span class="dropdown-text">Multistatic Radar Detection Performance Model</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -367,7 +378,7 @@ Figure&nbsp;3: Schematic of a pulse-tube-based dilution refrigerator. Pumps are 
 </figcaption>
 </figure>
 </div>
-<p>At <a href="https://www.hrl.com/">HRL Laboratories</a>, I was part of one of the most advanced semiconductor-based <a href="https://quantum.hrl.com/">quantum computing</a> programs in the world. As the program grew, there was a need to gain a better understanding of the various factors limiting qubit test throughput, particularly as it related to the health of the dilution refrigerators used for testing. Dilution refrigerators are <a href="https://bluefors.com/stories/how-does-a-dilution-refrigerator-work/">complex systems</a> (<a href="https://web.archive.org/web/20260102100826/https://bluefors.com/stories/how-does-a-dilution-refrigerator-work/">archived</a>) with <a href="https://bluefors.com/stories/components-of-the-dilution-refrigerator-measurement-system/">many components</a> (<a href="https://web.archive.org/web/20260218095529/https://bluefors.com/stories/components-of-the-dilution-refrigerator-measurement-system/">archived</a>), such as pumps, that can impact performance and cause downtime if they fail. However, there was no comprehensive data on the health of the test system fleet.</p>
+<p>At <a href="https://www.hrl.com/">HRL Laboratories</a>, I was part of one of the most advanced semiconductor-based <a href="https://quantum.hrl.com/">quantum computing</a> programs in the world. As the program grew, there was a need to gain a better understanding of the various factors limiting qubit test throughput, particularly as it related to the health of the dilution refrigerators used for testing. Dilution refrigerators are <a href="https://bluefors.com/stories/how-does-a-dilution-refrigerator-work/">complex systems</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> with <a href="https://bluefors.com/stories/components-of-the-dilution-refrigerator-measurement-system/">many components</a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, such as pumps, that can impact performance and cause downtime if they fail. However, there was no comprehensive data on the health of the test system fleet.</p>
 <p>In the absence of real health data, I developed a stochastic model in <a href="https://www.python.org/">Python</a> of the test system fleet, simulating the impact of various factors such as component and facility failure rates, repair times, and system cycling on overall test system uptime. The model was used to identify the likely largest factors contributing to downtime, and to estimate the potential impact of various mitigation strategies. These results contributed to high-level discussions on possible upgrades to the test infrastructure.</p>
 <p>Eventually a data pipeline was developed to collect real health data from the test systems, which was stored in an <a href="https://www.elastic.co/elasticsearch/">Elasticsearch</a> database. I used the Elasticsearch <a href="https://en.wikipedia.org/wiki/API">API</a> in Python to reduce the complex health data into high-level system and fleet uptime metrics. I also fused the data with qubit test information stored in a <a href="https://en.wikipedia.org/wiki/SQL">SQL</a> database in order to determine detailed qubit test throughput metrics. Finally, I developed <a href="https://grafana.com/">Grafana</a> dashboards to visualize the uptime and throughput metrics, in order to allow program leadership to monitor the test fleet in real time and identify opportunities for improvement.</p>
 </section>
@@ -381,7 +392,14 @@ Figure&nbsp;3: Schematic of a pulse-tube-based dilution refrigerator. Pumps are 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Archived: <a href="https://web.archive.org/web/20260102100826/https://bluefors.com/stories/how-does-a-dilution-refrigerator-work/" class="uri">https://web.archive.org/web/20260102100826/https://bluefors.com/stories/how-does-a-dilution-refrigerator-work/</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Archived: <a href="https://web.archive.org/web/20260218095529/https://bluefors.com/stories/components-of-the-dilution-refrigerator-measurement-system/" class="uri">https://web.archive.org/web/20260218095529/https://bluefors.com/stories/components-of-the-dilution-refrigerator-measurement-system/</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

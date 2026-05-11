@@ -299,6 +299,17 @@ window.Quarto = {
     <a class="nav-link" href="./defense.html"> 
 <span class="menu-text">Aerospace &amp; Defense</span></a>
   </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-independent-projects" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Independent Projects</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-independent-projects">    
+        <li>
+    <a class="dropdown-item" href="./radar.html">
+ <span class="dropdown-text">Multistatic Radar Detection Performance Model</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
@@ -329,6 +340,9 @@ window.Quarto = {
   <ul>
   <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
   <li><a href="#approach" id="toc-approach" class="nav-link" data-scroll-target="#approach">Approach</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
+  <li><a href="#follow-on-directions" id="toc-follow-on-directions" class="nav-link" data-scroll-target="#follow-on-directions">Follow-on Directions</a></li>
   </ul>
 </nav>
     </div>
@@ -355,16 +369,129 @@ window.Quarto = {
 </header>
 
 
-<p><em>Status: in progress, last updated 5/10/2026</em></p>
-<p>This project develops a Python framework for evaluating radar sensor performance against small uncrewed aerial systems (UAS), emphasizing the geometric advantages of multistatic (distributed) configurations over monostatic baselines. The framework implements monostatic and bistatic radar range equations, Shnidman’s detection probability model with Swerling target fluctuation, and an aspect-dependent target radar cross-section model built from composite canonical scatterers and calibrated to published Ku-band small-quadcopter measurements. Outputs include 2D probability-of-detection contours quantifying performance differences between a single monostatic radar and an N-node distributed configuration against low-RCS aspect-dependent targets. The study is motivated by the operational importance of counter-UAS radar and the intuition that geometric diversity in distributed sensor networks provides detection coverage that monostatic systems cannot match, particularly against targets with strong forward-aspect RCS suppression.</p>
+<p>This project develops a Python framework for evaluating radar sensor performance against small uncrewed aerial systems (UAS), emphasizing the geometric advantages of multistatic (distributed) configurations over monostatic baselines. The framework implements monostatic and bistatic radar range equations, Shnidman’s detection probability model with Swerling target fluctuation, and an aspect-dependent target radar cross-section model built from composite canonical scatterers and calibrated to published Ku-band small-quadcopter measurements. Outputs include 2D probability-of-detection contours quantifying performance differences between a single monostatic radar and an <em>N</em>-node distributed configuration against low-RCS aspect-dependent targets. The study is motivated by the operational importance of counter-UAS radar and the intuition that geometric diversity in distributed sensor networks provides detection coverage that monostatic systems cannot match, particularly against targets with strong aspect-sensitive RCS suppression.</p>
 <section id="motivation" class="level3">
 <h3 class="anchored" data-anchor-id="motivation">Motivation</h3>
-<p>Small commercial <a href="https://en.wikipedia.org/wiki/Unmanned_aerial_vehicle">UAS</a> pose an asymmetric challenge for <a href="https://en.wikipedia.org/wiki/Radar">radar</a> surveillance: their <a href="https://en.wikipedia.org/wiki/Radar_cross_section">RCS</a> is low, strongly aspect-dependent, and concentrated in particular directions where monostatic systems are weakest (forward aspect). Distributed (multistatic) radar architectures address this through geometric diversity–different <a href="https://en.wikipedia.org/wiki/Transmitter">transmitter</a>-<a href="https://en.wikipedia.org/wiki/Radio_receiver">receiver</a> pairs view the target from different aspects simultaneously, exploiting <a href="https://en.wikipedia.org/wiki/Bistatic_radar">bistatic</a> RCS behaviors (including forward-scatter enhancement) that monostatic systems can’t access. This project develops a Python framework for quantifying that geometric advantage in detection performance.</p>
+<p>Small commercial <a href="https://en.wikipedia.org/wiki/Unmanned_aerial_vehicle">UAS</a> pose an asymmetric challenge for <a href="https://en.wikipedia.org/wiki/Radar">radar</a> surveillance: their <a href="https://en.wikipedia.org/wiki/Radar_cross_section">RCS</a> is low, strongly aspect-dependent, and concentrated in particular directions where monostatic systems can be particularly weak. Distributed (multistatic) radar architectures address this through geometric diversity — different <a href="https://en.wikipedia.org/wiki/Transmitter">transmitter</a>-<a href="https://en.wikipedia.org/wiki/Radio_receiver">receiver</a> pairs view the target from different aspects simultaneously, exploiting <a href="https://en.wikipedia.org/wiki/Bistatic_radar">bistatic</a> RCS behaviors (including forward-scatter enhancement) that monostatic systems cannot access. This project develops a Python framework for quantifying that geometric advantage in detection performance.</p>
 </section>
 <section id="approach" class="level3">
 <h3 class="anchored" data-anchor-id="approach">Approach</h3>
-<p>We integrate three components: (1) a calibrated aspect-dependent UAS RCS model built from composite canonical scatterers (sphere, plate, cylinder primitives) in the <a href="https://en.wikipedia.org/wiki/Physical_optics">physical optics</a> regime, anchored to published <a href="https://en.wikipedia.org/wiki/Ku_band">Ku-band</a> measurements of a small commercial <a href="https://en.wikipedia.org/wiki/Quadcopter">quadcopter</a>; (2) the standard radar range equation in monostatic and bistatic forms; (3) Shnidman’s equation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> for <a href="https://en.wikipedia.org/wiki/Fluctuation_loss">fluctuating-target</a> detection probability under Swerling 1 statistics (the appropriate model for small UAS), inverted numerically for <span class="math inline">\(P_d\)</span> contour evaluation.</p>
-<p>Bistatic RCS<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> is handled by the monostatic-bistatic equivalence theorem for general bistatic angles, evaluating the monostatic RCS at the bisector aspect. The forward-scatter regime (<span class="math inline">\(\beta \approx 180\degree\)</span>) is treated separately using <span class="math inline">\(\sigma_{FS} \approx 4\pi A^2/\lambda^2\)</span>–a direct application of <a href="https://en.wikipedia.org/wiki/Babinet%27s_principle">Babinet’s principle</a> to the projected target area. Non-coherent fusion across pairs is implemented by summing linear <a href="https://en.wikipedia.org/wiki/Signal-to-noise_ratio">SNRs</a> (the high-SNR limit of the <a href="https://en.wikipedia.org/wiki/Noncentral_chi-squared_distribution">non-central chi-squared</a> detection statistic), justified by the fact that summed independent chi-squared variables yield combined non-centrality <span class="math inline">\(\lambda = 2\sum{\text{SNR}_i}\)</span>.</p>
+<p>We integrate three components: (1) a calibrated aspect-dependent UAS RCS model built from composite canonical scatterers (sphere, plate, cylinder primitives) in the <a href="https://en.wikipedia.org/wiki/Physical_optics">physical optics</a> regime, anchored to published <a href="https://en.wikipedia.org/wiki/Ku_band">Ku-band</a> measurements of a small commercial <a href="https://en.wikipedia.org/wiki/Quadcopter">quadcopter</a>; (2) the standard radar range equation in monostatic and bistatic forms; (3) Shnidman’s formulation for <a href="https://en.wikipedia.org/wiki/Fluctuation_loss">fluctuating-target</a> detection probability under Swerling 1 statistics (the appropriate model for small UAS), inverted numerically for <em>P<sub>d</sub></em> contour evaluation.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>Bistatic RCS is handled by the monostatic-bistatic equivalence theorem for general bistatic angles, evaluating the monostatic RCS at the bisector aspect. The forward-scatter regime (<span class="math inline">\(\beta \approx 180\degree\)</span>) is treated separately using <span class="math inline">\(\sigma_{FS} \approx 4\pi A^2/\lambda^2\)</span> — a direct application of <a href="https://en.wikipedia.org/wiki/Babinet%27s_principle">Babinet’s principle</a> to the projected target area.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> Non-coherent fusion across pairs is implemented by summing linear <a href="https://en.wikipedia.org/wiki/Signal-to-noise_ratio">SNRs</a> (the high-SNR limit of the <a href="https://en.wikipedia.org/wiki/Noncentral_chi-squared_distribution">non-central chi-squared</a> detection statistic), justified by the fact that summed independent chi-squared variables yield combined non-centrality <span class="math inline">\(\lambda = 2\sum{\text{SNR}_i}\)</span>.</p>
+</section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">Results</h3>
+<p>We model a small commercial <a href="https://www.dji.com/products/phantom">DJI Phantom</a>-class UAS as a composite of canonical geometries whose radar cross-sections can be found in the literature.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> In particular, we model the body as a flat plate, the arms as cylinders, and the rotors as small spheres. For simplicity, we use expressions given for the physical optics regime. At Ku-band, the wavelength is approximately 2 cm, so strictly speaking the physical optics approximation does not apply, especially for the thin arms. In addition, our model assumes all materials are perfectly conductive (and thus reflective), whereas in reality UAS have localized metal along with mostly composite materials. To partially compensate for these effects, we calibrate the result such that the RCS when averaged over aspect angle is equal to a published aspect-averaged RCS for a DJI Phantom 4 Pro.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
+<div id="fig-polar-rcs" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Polar plot of radar cross-section in dBsm for a small commercial UAS.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-polar-rcs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="files/radar/polar_rcs.png" class="img-fluid figure-img" style="width:50.0%" alt="Polar plot of radar cross-section in dBsm for a small commercial UAS.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-polar-rcs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Radar cross-section of composite canonical model for a small commercial UAS at 15 GHz, showing strong aspect-angle dependence.
+</figcaption>
+</figure>
+</div>
+<p>Detection of the UAS is modeled for a monostatic radar at 15 GHz with transmit power of 1 kW, antenna gain of 30 dBi, noise temperature of 500 K, noise bandwidth of 5 MHz, system losses of 5 dB, and 30 pulse integrations on receive. Signal-to-noise ratio is calculated using the radar equation:<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p><span class="math display">\[\frac{S}{N} = \frac{P_t\, G^2 \lambda^2 \sigma}{(4\pi)^3 R^4\, k_B T_s\, B_n\, L}.\]</span></p>
+<p>This SNR is then used to determine the probability of detection by numerically inverting Shnidman’s empirical formulation for estimating the required SNR for detection given desired <em>P<sub>d</sub></em> and probability of false alarm <em>P<sub>fa</sub></em>. We use the Swerling Level I case of Shnidman’s formulation because we expect scan-to-scan fluctuations of the UAS RCS due to rotor blade rotation and quick aspect angle changes. The expected behavior is observed in <a href="#fig-mono-pd" class="quarto-xref">Figure&nbsp;2 (d)</a>: <em>P<sub>d</sub></em> is high close to the radar, due to the <em>R<sup>–4</sup></em> dependence of SNR, and in regions where the aspect angle of the target corresponds to a high RCS.</p>
+<div id="fig-monostatic" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-monostatic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-monostatic" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-mono-aspect" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Plot of target aspect angle for a radar at origin.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mono-aspect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="files/radar/monostatic_aspect.png" id="fig-mono-aspect" class="img-fluid figure-img" data-ref-parent="fig-monostatic" alt="Plot of target aspect angle for a radar at origin.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mono-aspect-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-monostatic" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-mono-rcs" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Plot of target RCS for a radar at origin.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mono-rcs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="files/radar/monostatic_rcs.png" id="fig-mono-rcs" class="img-fluid figure-img" data-ref-parent="fig-monostatic" alt="Plot of target RCS for a radar at origin.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mono-rcs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-monostatic" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-mono-snr" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Plot of target SNR for a radar at origin.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mono-snr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="files/radar/monostatic_snr.png" id="fig-mono-snr" class="img-fluid figure-img" data-ref-parent="fig-monostatic" alt="Plot of target SNR for a radar at origin.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mono-snr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c)
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-monostatic" style="flex-basis: 50.0%;justify-content: flex-start;">
+<div id="fig-mono-pd" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Contour plot of probability to detect target for a radar at origin.">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mono-pd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="files/radar/monostatic_pd.png" id="fig-mono-pd" class="img-fluid figure-img" data-ref-parent="fig-monostatic" alt="Contour plot of probability to detect target for a radar at origin.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-mono-pd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d)
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-monostatic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Plots for a target heading in the +<em>x</em> direction, with a monostatic radar located at the origin. The result at each (<em>x</em>, <em>y</em>) position corresponds to the target being at that position. (a) Aspect angle of target. Since target is headed in the +<em>x</em> direction, aspect angle is highest (broad-side) when its <em>x</em>-coordinate is close to zero, and lowest (tail-on) when its <em>y</em>-coordinate is close to zero. (b) Radar cross-section of target. Broad-side aspect corresponds with a trough in the RCS, as seen in <a href="#fig-polar-rcs" class="quarto-xref">Figure&nbsp;1</a>, and tail-on corresponds with a peak. The peaks and troughs are also responsible for the banding in the plot. (c) Signal-to-noise ratio of target. High SNR is observed close to the radar due to strong range dependence, but SNR is also enhanced for <em>y</em> close to zero due to the RCS aspect peak. (d) Probability of detection contours. <em>P<sub>d</sub></em> is highest in regions of high SNR.
+</figcaption>
+</figure>
+</div>
+<p>In a bistatic radar, the transmitter and receiver are located at different positions. The radar equation changes accordingly:</p>
+<p><span class="math display">\[\frac{S}{N} = \frac{P_t\, G_t G_r\, \lambda^2 \sigma}{(4\pi)^3 R_t^2 R_r^2\, k_B T_s\, B_n\, L}.\]</span></p>
+<p>Here, <span class="math inline">\(\sigma\)</span> is the bistatic RCS. For scattering angles <span class="math inline">\(\beta\)</span> (<em>i.e.</em>, the angle between the target-to-transmitter vector and the target-to-receiver vector) less than 180°, the RCS is equivalent to the monostatic RCS at an aspect corresponding to the bisector of the scattering angle. However, RCS is enhanced for <span class="math inline">\(\beta \approx 180\degree\)</span> due to forward scattering. The angular cutoff for the forward-scattering regime is given by <span class="math inline">\(\theta_{FS} \approx \lambda/l\)</span>, where <span class="math inline">\(l\)</span> is a characteristic side length of the target.<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a> In our case, at 15 GHz, λ ≈ 2 cm; for a target characteristic length of ~35 cm (rotor-to-rotor diagonal of a Phantom-class quadcopter), <span class="math inline">\(\theta_{FS} \approx \lambda/l \approx 3\degree\)</span>, giving a ±3° window around the <span class="math inline">\(\beta = 180\degree\)</span> line.</p>
+<div id="fig-bistatic" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Contour plot of probability of detection for target with bistatic radar.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-bistatic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="files/radar/bistatic_pd.png" class="img-fluid figure-img" style="width:50.0%" alt="Contour plot of probability of detection for target with bistatic radar.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-bistatic-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Bistatic probability of detection contours for a target heading in the +<em>x</em> direction. Identical antennae are placed at the origin (transmitter) and (5 km, 5 km) (receiver). Strong <em>P<sub>d</sub></em> enhancement is observed along the forward-scattering corridor between the two antennae.
+</figcaption>
+</figure>
+</div>
+<p>We show the probability of detection for a bistatic configuration in <a href="#fig-bistatic" class="quarto-xref">Figure&nbsp;3</a>. The two antennae have identical parameters. Although there is strong enhancement along the corridor between them, local <em>P<sub>d</sub></em> is reduced when compared to the monostatic case in <a href="#fig-mono-pd" class="quarto-xref">Figure&nbsp;2 (d)</a>. This is because when <em>R<sub>t</sub></em> is small, <em>R<sub>r</sub></em> is large, and vice versa. Note that with identical antenna parameters, the radar equation is symmetric when switching transmitter with receiver. We verified this symmetry by computing the role-reversed configuration, which produces an identical detection contour — a consistency check on the geometry implementation.</p>
+<p>What if we add additional antennae at the other two corners of the scene? This would result in a 4-node radar network, where each pair of nodes constitutes a bistatic radar. Combining independent bistatic looks at the target is analogous to non-coherent pulse integration in a single receiver. Thus, in the high-SNR regime (<em>i.e.</em>, where <span class="math inline">\(P_d \gtrsim 0.5\)</span>, which are the regions of interest), the linear SNRs corresponding to each bistatic pair can be added together to determine the overall network SNR.</p>
+<div id="fig-network" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Contour plot of probability of detection for target with 4-node radar network.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-network-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="files/radar/network_pd.png" class="img-fluid figure-img" alt="Contour plot of probability of detection for target with 4-node radar network.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-network-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Probability of detection contours for a target headed in the +<em>x</em> direction with a radar network with nodes at each corner of the scene. Coverage is significantly enhanced when compared with the monostatic (<a href="#fig-mono-pd" class="quarto-xref">Figure&nbsp;2 (d)</a>) and bistatic (<a href="#fig-bistatic" class="quarto-xref">Figure&nbsp;3</a>) cases.
+</figcaption>
+</figure>
+</div>
+<p>Enhanced <em>P<sub>d</sub></em> coverage is apparent in <a href="#fig-network" class="quarto-xref">Figure&nbsp;4</a> due to both the additional forward-scatter corridors between pairs and the greater combined SNR from pairwise summing. It also appears that there are no more regions with <em>P<sub>d</sub></em> &lt; 0.1 remaining in the scene; however, caution is warranted in regions where individual pair SNRs fall below ~3 dB, where the high-SNR approximation underlying linear SNR summation begins to break down and proper non-coherent integration loss factors become significant. It should also be noted that the system-level enhancement is only possible with a centralized processor that has access to signal and noise information from each node.</p>
+<p>In practice, the network could be operated in <a href="https://en.wikipedia.org/wiki/MIMO">MIMO</a> fashion, where rather than unordered bistatic pairs, the pairs are effectively ordered into (transmitter, receiver) and vice versa by all nodes simultaneously transmitting orthogonal waveforms and then receiving from every other node. This doubles the number of bistatic looks, resulting in a factor of 2 improvement in the combined SNR. We have chosen the more conservative unordered-pairs framework for our calculations.</p>
+</section>
+<section id="discussion" class="level3">
+<h3 class="anchored" data-anchor-id="discussion">Discussion</h3>
+<p>We have shown that target detection can be significantly enhanced by using a distributed <em>N</em>-node radar architecture in comparison with monostatic and bistatic paradigms, due to SNR enhancement from forward-scattering and from adding together SNRs from each bistatic pair for the combined system SNR. We have not discussed target localization in this project. In fact, bistatic configurations degrade target localization relative to monostatic — the target position resulting from a detection can be anywhere on an ellipse with foci at the two antenna locations. However, multi-node networks with <em>N</em> ≥ 3 can triangulate between different pairwise detections, finding the intersection of ellipses where the target can be localized. Thus, the power of multistatic radar is not limited to detection enhancement.</p>
+<p>As mentioned above, these advantages are only possible with centralized processing. It also requires very precise pulse timing and synchronization between nodes. In addition to these challenges, there are a number of other limitations we have not considered. We have not modeled clutter, atmospheric effects, or terrain — our model is on two-dimensional Euclidean space. Our radar cross-section model is also greatly simplified and uses assumptions including perfect electrical conductivity and the physical optics regime that may not be valid. An RCS model derived from measurements and/or a high-fidelity electromagnetics code would yield more accurate results.</p>
+</section>
+<section id="follow-on-directions" class="level3">
+<h3 class="anchored" data-anchor-id="follow-on-directions">Follow-on Directions</h3>
+<p>Developing and using a high-fidelity RCS model is one possible direction for advancing this work. We could also model clutter, or add terrain and a <em>z</em>-dimension for the target. We could model coherent processing instead of just non-coherent. Doppler processing could be used for rotor signatures and to validate the Swerling fluctuator model assumption. The work could also be extended beyond detection to tracking, including track fusion across node pairs. Finally, we could extend to multi-band radar operation.</p>
 
 
 </section>
@@ -373,8 +500,12 @@ window.Quarto = {
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
-<li id="fn1"><p>D. A. Shnidman, “Determination of required SNR values [radar detection],” in <em>IEEE Transactions on Aerospace and Electronic Systems</em>, vol.&nbsp;38, no. 3, pp.&nbsp;1059-1064, July 2002, <a href="https://doi.org/10.1109/TAES.2002.1039422">doi: 10.1109/TAES.2002.1039422</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>D. A. Shnidman, “Determination of required SNR values [radar detection],” in <em>IEEE Transactions on Aerospace and Electronic Systems</em>, vol.&nbsp;38, no. 3, pp.&nbsp;1059-1064, July 2002, doi: <a href="https://doi.org/10.1109/TAES.2002.1039422">10.1109/TAES.2002.1039422</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>M. I. Skolnik, <em>Introduction to Radar Systems</em>, 2nd ed.&nbsp;New York: McGraw-Hill, 1980.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>G. T. Ruck, D. E. Barrick, W. D. Stuart, C. K. Krichbaum, <em>Radar Cross Section Handbook</em>. New York: Plenum Press, 1970.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>M. Ezuma, C. K. Anjinappa, M. Funderburk and I. Guvenc, “Radar Cross Section Based Statistical Recognition of UAVs at Microwave Frequencies,” in <em>IEEE Transactions on Aerospace and Electronic Systems</em>, vol.&nbsp;58, no. 1, pp.&nbsp;27-46, Feb.&nbsp;2022, doi: <a href="https://doi.org/10.1109/TAES.2021.3096875">10.1109/TAES.2021.3096875</a>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>R. M. O’Donnell, “Introduction to Radar Systems,” MIT Lincoln Laboratory. [Online]. Available: <a href="https://www.ll.mit.edu/outreach/web-based-course-radar-introduction-radar-systems" class="uri">https://www.ll.mit.edu/outreach/web-based-course-radar-introduction-radar-systems</a>. [Accessed: May 11, 2026].<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>K. Kulpa, P. Samczyński, P. Krysik, B. Salski, P. Kopyt, and M. Malik, “Forward Scattering Effect Exploitation in Passive Radars,” Warsaw University of Technology, Tech. Rep.&nbsp;AFRL-AFOSR-UK-TR-2019-0051, AFOSR Grant FA9550-17-1-0041, Sep.&nbsp;2019.<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
