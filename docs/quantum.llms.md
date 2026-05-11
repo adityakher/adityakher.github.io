@@ -6,13 +6,13 @@
 
 At Caltech and JPL, I worked under [Prof. Jonas Zmuidzinas](https://www.pma.caltech.edu/people/jonas-zmuidzinas) and [Dr. Peter K. Day](https://www.jpl.nasa.gov/site/research/pday/), who had pioneered a new, highly scalable superconducting detector technology called the [microwave kinetic inductance detector](https://en.wikipedia.org/wiki/Microwave_kinetic_inductance_detector). MKIDs are superconducting [microwave](https://en.wikipedia.org/wiki/Microwave) resonators where the inductance is dominated by [kinetic inductance](https://en.wikipedia.org/wiki/Kinetic_inductance), a property that exists in all conductors but is particularly strong in superconductors. They can be fabricated with a single layer of superconducting material and are straightforward to multiplex, as resonators in a large array can be designed with slightly different resonant frequencies, with the whole array excited and read-out via a [frequency comb](https://en.wikipedia.org/wiki/Frequency_comb) on a common feedline.
 
-![Photograph of KPUP device.](files/kpup_website.jpeg)
+![Photograph of KPUP device.](files/quantum/kpup_website.jpeg)
 
 Figure 1: Fabricated KPUP resonator device. Microwave feedline is at the top, and current signal input is coming from the right. Kinetic inductor is towards the bottom of the device, with capacitor comprising most of the device area. Adapted from A. Kher et al., J Low Temp Phys 184, 480–485 (2016).
 
 The group had also been investigating a nonlinearity in the kinetic inductance; namely, that the kinetic inductance has a dependence on the current flowing through the material. For my PhD work, I built on this research and took inspiration from MKID technology in order to develop a novel superconducting current sensor consisting of a microwave resonator with a nonlinear kinetic inductance. This device could be an easily multiplexable alternative to SQUIDs for reading out TESs, which retain some advantages over MKIDs. We named it the kinetic inductance parametric up-converter (KPUP), as it up-converts the low-frequency TES current signal to the microwave domain, where there is much greater available bandwidth for array multiplexing. Like SQUIDs, the added noise from the KPUP, which in principle dissipates no energy, could be quantum-limited.
 
-![TES bias curve.](files/tes_bias_curve.jpg)
+![TES bias curve.](files/quantum/tes_bias_curve.jpg)
 
 Figure 2: TES superconducting transition mapped out by KPUP at different temperatures. At low input current, the TES current is equal to the input, and at high input current the TES is ohmic. The transition is in between. Adapted from A. Kher, Dissertation, California Institute of Technology (2017).
 
@@ -22,7 +22,7 @@ This work was presented at several conferences and published in the [Journal of 
 
 ### Qubit Test System Monitoring
 
-![Cross-sectional schematic of a pulse-tube-based dilution refrigerator showing helium flow through the still, heat exchangers, and mixing chamber](files/500px-Dilution_refrigerator03.jpg)
+![Cross-sectional schematic of a pulse-tube-based dilution refrigerator showing helium flow through the still, heat exchangers, and mixing chamber](files/quantum/500px-Dilution_refrigerator03.jpg)
 
 Figure 3: Schematic of a pulse-tube-based dilution refrigerator. Pumps are in the top left. Dilution circuit is on the right, including still, heat exchangers, and mixing chamber. [Adwaele](https://commons.wikimedia.org/wiki/File:Dilution_refrigerator03.jpg), [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) via Wikimedia Commons.
 

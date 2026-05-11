@@ -2,7 +2,7 @@
 
 ### Missile Warning Algorithms
 
-![Artist's rendering of a SBIRS satellite in orbit above Earth](files/150515-F-ZZ999-111_reduced.jpg)
+![Artist's rendering of a SBIRS satellite in orbit above Earth](files/defense/150515-F-ZZ999-111_reduced.jpg)
 
 Figure 1: Illustration of a missile warning satellite. [Image](https://www.spaceforce.mil/Multimedia/Photos/igphoto/2002305616/) ([archived](https://web.archive.org/web/20251118221456/https://www.spaceforce.mil/Multimedia/Photos/igphoto/2002305616/)): Lockheed Martin / U.S. Space Force (public domain).
 
@@ -18,13 +18,13 @@ In addition to missile launches, OPIR satellites have the ability to detect wild
 
 At Northrop Grumman I was part of a team working with the [US Forest Service](https://www.fs.fed.us/) to provide a potential wildfire detection and monitoring capability using OPIR data. This involved developing algorithms to efficently process wildfire detection data in real time. In particular, I developed an [unsupervised learning](https://en.wikipedia.org/wiki/Unsupervised_learning) algorithm to cluster OPIR data into distinct wildfire events, which could then be tracked over time to monitor the growth and spread of a fire. The algorithm generated near-real-time fire perimeters, which are critical for firefighting efforts and provided a drastic improvement over the once-per-day fire perimeters that firefighters [typically produce](https://www.nifc.gov/fire-information/maps) on an active incident.
 
-![Natural-color satellite image of California showing large smoke plumes from the Camp Fire in the north and the Hill and Woolsey Fires in the south, spreading west over the Pacific](files/california_tmo_2018313_lrg_reduced.jpg)
+![Natural-color satellite image of California showing large smoke plumes from the Camp Fire in the north and the Hill and Woolsey Fires in the south, spreading west over the Pacific](files/defense/california_tmo_2018313_lrg_reduced.jpg)
 
 Figure 2: Terra MODIS natural-color image from November 9, 2018, showing smoke from the Camp Fire spreading across the Sacramento Valley, with the Hill and Woolsey Fires visible in Southern California. NASA Earth Observatory image by Joshua Stevens, using MODIS data from NASA EOSDIS/LANCE and GIBS/Worldview. [Source](https://science.nasa.gov/earth/earth-observatory/camp-fire-rages-in-california-144225/).
 
 In November 2018, during critical fire-risk weather conditions, the Forest Service issued an urgent request for OPIR support for their wildfire response in California. The Space Force, who owns the satellites and data, gave an [unprecedented approval](https://web.archive.org/web/20200813081834/https:/www.afspc.af.mil/News/Article-Display/Article/1959289/improving-lives-maximizing-taxpayer-dollars-with-dual-use-space-capabilities/) to temporarily use OPIR for this purpose, and our team set up an operational data pipeline literally overnight to rapidly provide wildfire detection and monitoring information to the Forest Service. Not only was our data and software used, but Northrop Grumman staff, including myself, executed the 24/7 operational mission of monitoring the data and providing it to the Forest Service. The [wildfires of that season](https://en.wikipedia.org/wiki/2018_California_wildfires) were some of the deadliest and most destructive on record, and our team was credited with preventing the spread of four additional fires.
 
-![Certificate of Appreciation from the US Forest Service for support during the 2018 California wildfires](files/usda_reduced.jpg)
+![Certificate of Appreciation from the US Forest Service for support during the 2018 California wildfires](files/defense/usda_reduced.jpg)
 
 Figure 3: US Forest Service certificate for supporting wildfire response efforts in California in 2018.
 
@@ -36,7 +36,7 @@ This was an immensely rewarding experience, not only due to the direct societal 
 
 We collaborated with [Spectral Sciences, Inc.](https://www.spectral.com/) to leverage a prototype turn-key hyperspectral sensor based on [Corning’s](https://www.corning.com/worldwide/en/products/advanced-optics/product-materials/aerospace-defense/remote-sensing.html) microHSI 410 SHARK, which distinguishes 410 spectral bands. With so many bands, the sensor produces a large amount of data, which can be difficult to transmit in the limited bandwidth of a CubeSat downlink. Thus, an integral part of the project was to incorporate onboard processing hardware and software to analyze the hyperspectral data and extract key information before transmission. There were several [data reduction](https://en.wikipedia.org/wiki/Data_reduction) steps in the processing pipeline, including cloud rejection, environmental feature extraction, image chipping, and lossless data compression.
 
-![Results of four normalized-difference indices applied to hyperspectral data from JPL's AVIRIS airborne platform](files/aviris_reduced.jpg)
+![Results of four normalized-difference indices applied to hyperspectral data from JPL's AVIRIS airborne platform](files/defense/aviris_reduced.jpg)
 
 Figure 4: Hyperspectral analysis indices on Southern California scenes from AVIRIS. Adapted from A. Kher, “Hyperspectral Onboard Processing Cubesat Demonstration,” [36th Annual Small Satellite Conference, SSC22-I-06](https://digitalcommons.usu.edu/smallsat/2022/all2022/141/), August 2022.
 
