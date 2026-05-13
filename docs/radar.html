@@ -293,20 +293,20 @@ window.Quarto = {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./quantum.html"> 
-<span class="menu-text">Quantum Technology</span></a>
+<span class="menu-text">Quantum</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./defense.html"> 
-<span class="menu-text">Aerospace &amp; Defense</span></a>
+<span class="menu-text">Defense</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-independent-projects" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Independent Projects</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Projects</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-independent-projects">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
     <a class="dropdown-item" href="./radar.html">
- <span class="dropdown-text">Multistatic Radar Detection Performance Model</span></a>
+ <span class="dropdown-text">Multistatic Radar</span></a>
   </li>  
     </ul>
   </li>
@@ -314,10 +314,15 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="./files/AK_CV_full.pdf"> 
-<span class="menu-text">Curriculum Vitae</span></a>
+<span class="menu-text"><strong>CV</strong></span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://www.linkedin.com/in/aditya-kher/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/adityakher"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -370,6 +375,7 @@ window.Quarto = {
 
 
 <p>This project develops a Python framework for evaluating radar sensor performance against small uncrewed aerial systems (UAS), emphasizing the geometric advantages of multistatic (distributed) configurations over monostatic baselines. The framework implements monostatic and bistatic radar range equations, Shnidman’s detection probability model with Swerling target fluctuation, and an aspect-dependent target radar cross-section model built from composite canonical scatterers and calibrated to published Ku-band small-quadcopter measurements. Outputs include 2D probability-of-detection contours quantifying performance differences between a single monostatic radar and an <em>N</em>-node distributed configuration against low-RCS aspect-dependent targets. The study is motivated by the operational importance of counter-UAS radar and the intuition that geometric diversity in distributed sensor networks provides detection coverage that monostatic systems cannot match, particularly against targets with strong aspect-sensitive RCS suppression.</p>
+<p>Project code and reproduction notebook following this study are <a href="https://github.com/adityakher/multistatic-radar">available</a>.</p>
 <section id="motivation" class="level3">
 <h3 class="anchored" data-anchor-id="motivation">Motivation</h3>
 <p>Small commercial <a href="https://en.wikipedia.org/wiki/Unmanned_aerial_vehicle">UAS</a> pose an asymmetric challenge for <a href="https://en.wikipedia.org/wiki/Radar">radar</a> surveillance: their <a href="https://en.wikipedia.org/wiki/Radar_cross_section">RCS</a> is low, strongly aspect-dependent, and concentrated in particular directions where monostatic systems can be particularly weak. Distributed (multistatic) radar architectures address this through geometric diversity — different <a href="https://en.wikipedia.org/wiki/Transmitter">transmitter</a>-<a href="https://en.wikipedia.org/wiki/Radio_receiver">receiver</a> pairs view the target from different aspects simultaneously, exploiting <a href="https://en.wikipedia.org/wiki/Bistatic_radar">bistatic</a> RCS behaviors (including forward-scatter enhancement) that monostatic systems cannot access. This project develops a Python framework for quantifying that geometric advantage in detection performance.</p>
@@ -488,7 +494,7 @@ Figure&nbsp;4: Probability-of-detection contours for a target headed in the +<em
 <h3 class="anchored" data-anchor-id="discussion">Discussion</h3>
 <p>We have shown that target detection can be significantly enhanced by using a distributed <em>N</em>-node radar architecture in comparison with monostatic and bistatic paradigms, due to SNR enhancement from forward-scattering and from summing SNRs from each bistatic pair for the combined system SNR. We have not discussed target localization in this project. In fact, bistatic configurations degrade target localization relative to monostatic — the target position resulting from a detection can be anywhere on an ellipse with foci at the two antenna locations. However, multi-node networks with <em>N</em> ≥ 3 can triangulate between different pairwise detections, finding intersections between multiple bistatic ellipses to localize targets. Thus, the power of multistatic radar is not limited to detection enhancement.</p>
 <p>As mentioned above, these advantages are only possible with centralized processing. It also requires very precise pulse timing and synchronization between nodes. These requirements — centralized fusion across coherent, time-synchronized nodes — are the defining design constraints of coherent distributed radar networks currently being developed for counter-UAS applications.</p>
-<p>In addition to these challenges, there are a number of other limitations we have not considered. We have not modeled clutter, atmospheric effects, or terrain — our model is on two-dimensional Euclidean space. Our radar cross-section model is also greatly simplified and uses assumptions including the perfect electrical conductor and physical optics approximations that may not be valid. An RCS model derived from measurements and/or a high-fidelity electromagnetics code would yield more accurate results.</p>
+<p>In addition to these challenges, there are a number of other limitations we have not considered. We have not modeled clutter, atmospheric effects, or terrain — our model is on two-dimensional Euclidean space. Our radar cross-section model is also greatly simplified and uses assumptions including the perfect electrical conductor and physical optics approximations that may not be valid. An RCS model derived from measurements and/or a high-fidelity electromagnetics solver would yield more accurate results.</p>
 </section>
 <section id="follow-on-directions" class="level3">
 <h3 class="anchored" data-anchor-id="follow-on-directions">Follow-On Directions</h3>

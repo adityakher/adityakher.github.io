@@ -11,18 +11,20 @@ website:
       - href: index.qmd
         text: Home
       - href: quantum.qmd
-        text: Quantum Technology
+        text: Quantum
       - href: defense.qmd
-        text: Aerospace & Defense
-      - text: Independent Projects
+        text: Defense
+      - text: Projects
         menu:
-          - text: Multistatic Radar Detection Performance Model
+          - text: Multistatic Radar
             href: radar.qmd
     right:
       - href: files/AK_CV_full.pdf
-        text: "Curriculum Vitae"
+        text: "**CV**"
       - icon: linkedin
         href: https://www.linkedin.com/in/aditya-kher/
+      - icon: github
+        href: https://github.com/adityakher
   page-footer:
     left: "© 2026 Aditya Kher"
     right: "Built with [Quarto](https://quarto.org/)"

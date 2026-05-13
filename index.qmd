@@ -15,13 +15,16 @@ about:
           href: https://orcid.org/0000-0002-5994-428X
         - text: "{{< ai google-scholar >}} Google Scholar"
           href: https://scholar.google.com/citations?hl=en&user=0ho4P3EAAAAJ
+        - icon: github
+          text: GitHub
+          href: https://github.com/adityakher
 ---
 
 I'm an applied physicist and systems engineer with extensive experience in both the quantum technology and aerospace & defense industries. I've spent my career on R&D projects ranging from [quantum sensing](https://en.wikipedia.org/wiki/Quantum_sensor) and [computing](https://en.wikipedia.org/wiki/Quantum_computing) to satellite-based [remote sensing](https://en.wikipedia.org/wiki/Remote_sensing) systems, and have contributed everywhere from early-stage research to rapid development and operational fielding. My expertise lies in applying rigorous, first-principles and systems-level thinking to problems in computational modeling, mission-critical algorithms, and advanced hardware development. I particularly enjoy mission-oriented technology projects where I can leverage deep physical principles and intuition, whether it's early-stage R&D or a product that will ship in months.
 
 I received my PhD in Applied Physics from [Caltech](https://www.caltech.edu/), where I was a member of the sophomore class of [NASA Space Technology Research Fellows](https://web.archive.org/web/20170705074149mp_/https://www.nasa.gov/directorates/spacetech/strg/2012_class.html). I shuttled between campus and the [Jet Propulsion Laboratory](https://www.jpl.nasa.gov/) for my research, which focused on novel [superconducting](https://en.wikipedia.org/wiki/Superconductivity) sensor and amplifier technologies for astronomy instrumentation. Prior to that, I also received an MS from Caltech, and a BS from the [University of California, San Diego](https://ucsd.edu/).
 
-Check out the pages describing my professional work relevant to [quantum](quantum.qmd) and [defense](defense.qmd), as well as my independent projects including a [radar performance model](radar.qmd). You can also take a look at my full [CV](files/AK_CV_full.pdf).
+Check out the pages describing my professional work relevant to [quantum](quantum.qmd) and [defense](defense.qmd), as well as my independent projects including a [radar detection performance model](radar.qmd). You can also take a look at my full [CV](files/AK_CV_full.pdf).
 
 When I'm not working, I'm typically reading [The Economist](https://www.economist.com/), watching an arthouse film at an [independent cinema](https://revivalhub.com/), or doing some spirited driving in the canyons of Southern California.
 
