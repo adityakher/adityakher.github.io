@@ -8,6 +8,9 @@ toc: false
 about:
     template: trestles
     links:
+        - icon: envelope
+          text: Email
+          href: mailto:akher@alumni.caltech.edu
         - icon: linkedin
           text: LinkedIn
           href: https://www.linkedin.com/in/aditya-kher/
@@ -28,8 +31,8 @@ Check out the pages describing my professional work relevant to [quantum](quantu
 
 When I'm not working, I'm typically reading [The Economist](https://www.economist.com/), watching an arthouse film at an [independent cinema](https://revivalhub.com/), or doing some spirited driving in the canyons of Southern California.
 
-Feel free to reach out on [LinkedIn](https://www.linkedin.com/in/aditya-kher/) if you want to talk physics, technology, or movies!
+Feel free to reach out on [LinkedIn](https://www.linkedin.com/in/aditya-kher/) or [email](mailto:akher@alumni.caltech.edu) if you want to talk physics, technology, or movies!
 
 ---
 
-*Last updated: May 2026*
+*Last updated: June 2026*
