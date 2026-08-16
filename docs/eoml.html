@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Earth Observation AI/ML Pipeline – Aditya Kher</title>
+<title>Benchmark Land-Cover Classification on Operational Sentinel-2 Imagery – Aditya Kher</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -264,20 +264,40 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./quantum.html"> 
-<span class="menu-text">Quantum Technology</span></a>
+<span class="menu-text">Quantum</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./defense.html"> 
-<span class="menu-text">Aerospace &amp; Defense</span></a>
+<span class="menu-text">Defense</span></a>
   </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Projects</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
+        <li>
+    <a class="dropdown-item" href="./radar.html">
+ <span class="dropdown-text">Multistatic Radar</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./eoml.html">
+ <span class="dropdown-text">Satellite Land Cover</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="./files/AK_CV_full.pdf"> 
-<span class="menu-text">Curriculum Vitae</span></a>
+<span class="menu-text"><strong>CV</strong></span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://www.linkedin.com/in/aditya-kher/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:akher@alumni.caltech.edu"> <i class="bi bi-envelope" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -293,8 +313,18 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#approach" id="toc-approach" class="nav-link" data-scroll-target="#approach">Approach</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
+  <li><a href="#follow-on-directions" id="toc-follow-on-directions" class="nav-link" data-scroll-target="#follow-on-directions">Follow-On Directions</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -302,7 +332,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Earth Observation AI/ML Pipeline</h1>
+<h1 class="title">Benchmark Land-Cover Classification on Operational Sentinel-2 Imagery</h1>
 </div>
 
 
@@ -319,12 +349,161 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><em>Status: in progress, last updated 5/7/2026</em></p>
-<p>This project develops an end-to-end machine learning pipeline for satellite-based Earth observation, focused on land cover classification and vegetation analysis using Sentinel-2 imagery. A ResNet-18 convolutional neural network is trained on the EuroSAT dataset to achieve 96% classification accuracy across ten land cover classes, with GradCAM used to visualize the spatial features driving model predictions. Sentinel-2 scenes are retrieved programmatically via the Microsoft Planetary Computer STAC API, and normalized difference vegetation index (NDVI) is computed from spectral bands to characterize vegetation density and health. The pipeline is wrapped in an agentic interface built on the Anthropic Claude API, enabling natural-language access to imagery retrieval and analysis. The work spans the full applied-ML lifecycle: model training and interpretability, geospatial data engineering, and LLM-based tool orchestration.</p>
+<p>This project develops a Python framework for applying a benchmark-trained land-cover classifier to arbitrary operational <a href="https://en.wikipedia.org/wiki/Sentinel-2">Sentinel-2</a> scenes and characterizing how its performance degrades away from the benchmark. The framework fine-tunes a <a href="https://en.wikipedia.org/wiki/Residual_neural_network">ResNet-18</a> (Sentinel-2-pretrained) on the ten-class <a href="https://github.com/phelber/EuroSAT">EuroSAT</a> dataset,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> then runs the trained model over full Sentinel-2 Level-2A scenes retrieved from the <a href="https://planetarycomputer.microsoft.com">Microsoft Planetary Computer</a>: bands are harmonized to the EuroSAT radiometric and spectral convention, tiled into 64×64 chips, classified with per-chip confidence, and reassembled into a georeferenced land-cover map. An independent, physics-based <a href="https://en.wikipedia.org/wiki/Normalized_difference_vegetation_index">NDVI</a> computation on the same scene provides a second opinion, and the per-chip maximum <a href="https://en.wikipedia.org/wiki/Softmax_function">softmax</a> probability provides an out-of-distribution signal. We apply the framework to two contrasting scenes — an agricultural landscape in California’s Central Valley and the Mediterranean coastline near Malibu — and use the disagreements among the learned classifier, the physical index, and the confidence signal to separate preprocessing (calibration) effects from fundamental limits of benchmark-to-operational transfer. The study is motivated by the gap between benchmark accuracy and operational reliability that governs whether a curated-dataset classifier can be trusted on real sensor feeds.</p>
+<p>Project code and a reproduction notebook following this study are <a href="https://github.com/adityakher/eoml">available</a>.</p>
+<section id="motivation" class="level3">
+<h3 class="anchored" data-anchor-id="motivation">Motivation</h3>
+<p>Curated image-classification benchmarks report accuracy on data drawn from the same distribution they were built from. EuroSAT is representative: roughly 27,000 Sentinel-2 patches, each 64×64 pixels and each a single, relatively pure land-cover class, on which a modestly-sized <a href="https://en.wikipedia.org/wiki/Convolutional_neural_network">convolutional network</a> reaches the mid-90s in test accuracy within a few epochs. Operational imagery is not drawn from that distribution. A real Sentinel-2 scene is a full swath at arbitrary geography and season; tiled to the benchmark’s chip size, an individual tile may contain several land-cover types, bare or transitional ground, and atmospheric and radiometric conditions absent from the training set.</p>
+<p>The operationally relevant question is therefore not the benchmark number but how much of it survives this shift, and — for any system expected to signal when it is operating outside its competence — whether the model’s own confidence tracks the shift. This project develops a framework to measure both. It uses two orthogonal probes of the same scenes: an independent physical index (NDVI), which depends on the surface rather than on the training distribution, and the classifier’s softmax confidence, which reports how typical each tile is of that distribution. Interpreting either probe first requires establishing that the benchmark model and the operational scene are placed on a common radiometric footing, so that disagreements reflect the scene rather than the preprocessing.</p>
+</section>
+<section id="approach" class="level3">
+<h3 class="anchored" data-anchor-id="approach">Approach</h3>
+<p>The framework integrates three elements: a classifier fine-tuned on the benchmark, a scene-inference bridge that carries the trained model to operational imagery through an explicit calibration layer, and two probes of each scene that are independent of the classifier — a physical vegetation index and the model’s own softmax confidence.</p>
+<p>We fine-tune a ResNet-18 initialized with <a href="https://arxiv.org/abs/1911.05722">MoCo</a> self-supervised Sentinel-2 pretrained weights (via <a href="https://github.com/microsoft/torchgeo">TorchGeo</a><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>) on EuroSAT’s ten classes, reaching test accuracy consistent with the published benchmark. To apply the trained model to an operational scene, the framework retrieves the scene from the Planetary Computer, harmonizes its bands to the EuroSAT radiometric and spectral convention (below), tiles it into 64×64 chips — each covering 640 m on the ground — classifies each chip, and reassembles the predictions and their per-chip confidences into georeferenced maps carrying the scene’s coordinate system.</p>
+<p>The bridge between the benchmark’s data convention and the scene’s is the crux. EuroSAT chips derive from Sentinel-2 Level-1C (top-of-atmosphere) products, whereas the Planetary Computer serves Level-2A (bottom-of-atmosphere, surface reflectance) scenes. Several systematics separate the two, and the framework corrects most of them: the band ordering is matched to EuroSAT’s and asserted against the installed weights; the cirrus band B10, present in L1C but removed by atmospheric correction in L2A, is zero-filled (a perturbation of order 0.001 after normalization); the +1000 DN radiometric offset carried by L2A processing baseline ≥ 04.00 is subtracted; and the 10/20/60 m native band resolutions are resampled to a common 10 m grid.</p>
+<p>One systematic is left uncorrected and is the largest of them. The L1C-to-L2A transition from top- to bottom-of-atmosphere reflectance removes the atmospheric path radiance that the EuroSAT training data still contains — a difference of hundreds of DN in the blue and visible bands, one to two orders of magnitude above the B10 effect, that leaves served scenes darker than the model’s training inputs. Correcting it on-footprint would require L1C for the same scene from a second catalog; here it is documented and bounded rather than removed. Distinguishing the corrected instrument effects from this residual, and both from genuine domain effects, is the organizing principle of the analysis that follows. It is the same separation of calibration from physics that the <a href="https://adityakher.com/radar.html">companion radar study</a> performs when it anchors its radar-cross-section model to measured Ku-band values before interpreting the resulting detection contours.</p>
+<p>The two probes are independent of the classifier in complementary ways. NDVI is a fixed function of surface reflectance, computed directly on each scene and depending on the ground rather than on the training distribution. The per-chip maximum softmax probability (MSP) reports instead how typical each tile is of that distribution, the standard baseline signal for out-of-distribution inputs.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> Disagreements among the classifier’s labels, the physical index, and the confidence localize what each is and is not sensitive to.</p>
+</section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">Results</h3>
+<section id="central-valley-scene" class="level4">
+<h4 class="anchored" data-anchor-id="central-valley-scene">Central Valley scene</h4>
+<p>We first apply the framework to an agricultural scene in California’s Central Valley (late June, roughly 13 km across), a landscape broadly comparable in land use to the European farmland that dominates EuroSAT.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/eoml/cv_rgb.png" class="img-fluid figure-img"></p>
+<figcaption>True-color composite of the Central Valley scene.</figcaption>
+</figure>
+</div>
+<p><em>(a)</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/eoml/cv_classmap.png" class="img-fluid figure-img"></p>
+<figcaption>EuroSAT land-cover class map.</figcaption>
+</figure>
+</div>
+<p><em>(b)</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/eoml/cv_ndvi.png" class="img-fluid figure-img"></p>
+<figcaption>NDVI on the same scene.</figcaption>
+</figure>
+</div>
+<p><em>(c)</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/eoml/cv_confidence_map.png" class="img-fluid figure-img"></p>
+<figcaption>Low-confidence chips hatched on the class map.</figcaption>
+</figure>
+</div>
+<p><em>(d)</em></p>
+<p><em>Figure 1: Central Valley scene. (a) True color. (b) EuroSAT classification: nearly the entire scene is AnnualCrop, with scattered HerbaceousVegetation and a few River chips tracing a watercourse. (c) NDVI, resolving high-NDVI active fields (concentrated to the west) from lower-NDVI fallow ground. (d) Chips with maximum softmax probability below 0.5, hatched; most of the scene is low-confidence, with the higher-confidence chips weakly concentrated over the active fields.</em></p>
+<p>The classifier assigns nearly the entire scene to AnnualCrop, with a minority of chips labeled HerbaceousVegetation and a few River chips (Figure 1b). NDVI on the same scene (Figure 1c) resolves a clear active/fallow structure that the single dominant label does not distinguish. To compare the learned labels against the physical index on a common footprint, we aggregate the 10 m NDVI field onto the classifier’s 640 m chip grid — an aggregation verified to reproduce the classifier’s tiling exactly — and summarize per predicted class (Table 1).</p>
+<table class="caption-top table">
+<caption><em>Table 1: Per-chip NDVI and confidence statistics by predicted class, Central Valley scene.</em></caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Predicted class</th>
+<th style="text-align: right;">Chips</th>
+<th style="text-align: right;">Mean NDVI</th>
+<th style="text-align: right;">Within-chip σ</th>
+<th style="text-align: right;">Mean MSP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">AnnualCrop</td>
+<td style="text-align: right;">257</td>
+<td style="text-align: right;">+0.216</td>
+<td style="text-align: right;">0.102</td>
+<td style="text-align: right;">0.432</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">HerbaceousVegetation</td>
+<td style="text-align: right;">96</td>
+<td style="text-align: right;">+0.284</td>
+<td style="text-align: right;">0.089</td>
+<td style="text-align: right;">0.375</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">River</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">+0.148</td>
+<td style="text-align: right;">0.175</td>
+<td style="text-align: right;">0.442</td>
+</tr>
+</tbody>
+</table>
+<p>Three features are apparent. First, the two vegetation classes are not separated by greenness: their mean NDVI ranges overlap, and the per-chip scatter (Figure 2) shows no clustering. The greenness structure NDVI captures lies <em>within</em> the dominant AnnualCrop class — spanning its active and fallow fields — rather than <em>between</em> the two labels. The classifier thus resolves land-cover <em>type</em> (cropland) while remaining insensitive to vegetation <em>state</em> (active versus fallow), and NDVI resolves the reverse; the two views are complementary along orthogonal axes. Second, within-chip NDVI standard deviation does not distinguish the two vegetation classes either (both ≈ 0.09–0.10); its one elevated value belongs to River (0.175), consistent with water/land boundaries inside those chips. Third, the AnnualCrop-versus-HerbaceousVegetation assignment has no correlate in any variable available here — greenness, within-chip heterogeneity, or spatial position — and it is not attributable to in-domain class confusion: on the EuroSAT confusion matrix both classes are well separated, their residual errors falling on PermanentCrop, Pasture, and Highway, none of which appear in this scene.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/eoml/cv_ndvi_scatter.png" class="img-fluid figure-img"></p>
+<figcaption>Per-chip mean NDVI versus within-chip σ, colored by predicted class.</figcaption>
+</figure>
+</div>
+<p><em>Figure 2: Per-chip NDVI mean against within-chip σ for the Central Valley scene, colored by predicted class. The two vegetation classes overlap with no clustering; only River separates, on the σ axis.</em></p>
+<p>The per-chip confidence clarifies this last point. Maximum softmax probability for all three classes falls in the range 0.38–0.44 (Table 1), far below the near-saturated confidence the model exhibits on EuroSAT test data. The classifier is not drawing the AnnualCrop/HerbaceousVegetation distinction with conviction; it is assigning low-confidence labels near a decision boundary, consistent with scene tiles lying outside the region of feature space the benchmark populated. Across the full scene, the confidence distribution (Figure 3) is shifted markedly toward lower values relative to the EuroSAT test set, and at a 0.5 threshold most of the scene is flagged low-confidence (Figure 1d). The flagged chips are not uniformly distributed: the higher-confidence chips are weakly concentrated over the active, high-NDVI fields (Pearson <em>r</em> = 0.21 between per-chip NDVI and confidence), indicating that the model is somewhat more confident on tiles resembling its predominantly-green training crops. The correlation is weak — a spatial tendency rather than a clean relationship — but consistent in sign.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/eoml/cv_confidence_hist.png" class="img-fluid figure-img"></p>
+<figcaption>Confidence distribution, Central Valley scene versus EuroSAT test set.</figcaption>
+</figure>
+</div>
+<p><em>Figure 3: Per-chip MSP for the Central Valley scene (density) against the EuroSAT test set. The scene’s distribution is shifted far toward lower confidence.</em></p>
+</section>
+<section id="malibu-coast-scene" class="level4">
+<h4 class="anchored" data-anchor-id="malibu-coast-scene">Malibu coast scene</h4>
+<p>We next apply the same framework to a coastal scene spanning the Santa Monica Mountains and the Pacific near Malibu — open ocean, the urban corridor along the Pacific Coast Highway, and Mediterranean chaparral.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/eoml/malibu_rgb.png" class="img-fluid figure-img"></p>
+<figcaption>True-color composite of the Malibu coast scene.</figcaption>
+</figure>
+</div>
+<p><em>(a)</em></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/eoml/malibu_classmap.png" class="img-fluid figure-img"></p>
+<figcaption>EuroSAT class map with low-confidence chips hatched.</figcaption>
+</figure>
+</div>
+<p><em>(b)</em></p>
+<p><em>Figure 4: Malibu coast scene. (a) True color. (b) EuroSAT classification with chips below MSP 0.5 hatched. Open water is assigned to SeaLake and the hills to HerbaceousVegetation, both at high confidence; the hatched low-confidence chips concentrate along the mixed coastline.</em></p>
+<p>Despite land cover geographically remote from EuroSAT’s European scenes, this scene is classified with substantially higher confidence than the Central Valley. Open water is assigned confidently and correctly to SeaLake; the chaparral hillsides are assigned to HerbaceousVegetation, and the coastal strip to Residential and River. Confidence is high across most of the scene and falls only along the immediate coastline, where 640 m chips mix water, beach, and built-up land with no single corresponding EuroSAT class. The scene’s confidence distribution (Figure 5) closely tracks the EuroSAT test set, in contrast to the Central Valley’s leftward-shifted distribution.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="files/eoml/malibu_confidence_hist.png" class="img-fluid figure-img"></p>
+<figcaption>Confidence distribution, Malibu scene versus EuroSAT test set.</figcaption>
+</figure>
+</div>
+<p><em>Figure 5: Per-chip MSP for the Malibu scene (density) against the EuroSAT test set. Unlike the Central Valley, the coastal scene’s distribution tracks the benchmark.</em></p>
+<p>The contrast between the two scenes indicates that in-distribution behavior for this model is governed less by geographic or land-use familiarity than by the resemblance of individual chips to EuroSAT’s curated, single-cover tiles. At 640 m the Malibu scene resolves into large, near-homogeneous regions — uniform ocean, continuous chaparral, a contiguous urban strip — each closely matching a single EuroSAT class. The Central Valley resolves into a fine mosaic of small parcels at differing phenological stages, including bare fallow ground, producing tiles that are mixed and unlike EuroSAT’s predominantly-green crop chips. Two further factors reinforce the coastal scene’s in-distribution character: EuroSAT, being European, includes Mediterranean scenes, and coastal California shares that Mediterranean biome, so the chaparral’s HerbaceousVegetation assignment is plausibly correct rather than a coincidental match; and the SeaLake class gives open water a direct home. The present two-scene comparison cannot separate the contribution of chip homogeneity from that of biome resemblance, as both favor the coastal scene.</p>
+</section>
+</section>
+<section id="discussion" class="level3">
+<h3 class="anchored" data-anchor-id="discussion">Discussion</h3>
+<p>We have applied a benchmark-trained land-cover classifier to two operational Sentinel-2 scenes and, using an independent physical index and the model’s own confidence as orthogonal probes, characterized where its benchmark competence transfers and where it does not. The classifier’s coarse land-cover assignments — cropland, water, urban, dominant vegetation type — are reliable on both scenes, indicating that benchmark accuracy carries operational meaning at the level of coarse classes. Its finer distinctions transfer less cleanly: the AnnualCrop/HerbaceousVegetation assignment on the agricultural scene has no physical correlate and is made at low confidence, the expected behavior of a patch classifier on tiles lying between its training classes rather than a correctable preprocessing error.</p>
+<p>The confidence signal behaves as a useful, if partial, indicator of operational reliability. It is low precisely where the input is mixed or unfamiliar — the fallow agricultural mosaic, the mixed coastline — and high where the scene resolves into homogeneous, in-distribution tiles. Its limits are worth stating: maximum softmax probability measures typicality rather than correctness, so a confidently-incorrect assignment would not be flagged. In the present scenes no such case arose, as the high-confidence assignments we could check were all defensible, but this remains a property of the signal rather than a guarantee from the data.</p>
+<p>The independent NDVI computation is complementary in a specific sense: it resolves the vegetation state (active versus fallow) to which the classifier’s land-cover-type label is insensitive, and its per-chip disagreements with the classifier localize what each method is and is not sensitive to. A learned classifier and a physical index reading the same scene together constrain interpretation more tightly than either alone.</p>
+<p>Underlying the analysis is the separation of calibration from fundamental effects. The band-order, cirrus-band, offset, and resolution systematics are instrument effects of the L1C-to-L2A bridge, corrected in preprocessing; the top-to-bottom-of-atmosphere reflectance shift is a residual instrument effect, bounded but not removed; and what remains after this accounting — the low-confidence fine labels, the transfer governed by chip resemblance rather than geography — is the fundamental behavior of the benchmark model on operational data. Without this separation, a preprocessing error and a genuine domain limit are not distinguishable, and neither can be characterized.</p>
+<p>Several limitations bound these conclusions. The comparison rests on two scenes and small per-class counts (four River chips on the Central Valley); the scenes are chosen to bracket a homogeneous/heterogeneous contrast rather than to sample a distribution, and they confound chip homogeneity with biome resemblance as drivers of transfer. The largest radiometric systematic, the top-to-bottom-of-atmosphere shift, is bounded rather than corrected. Confidence is characterized through top-1 maximum softmax probability alone; the top-1/top-2 margin or predictive entropy would resolve two-class hedging more directly. No retraining or domain adaptation is performed — the object of study is the benchmark model as-is — and tiling is non-overlapping, without a quantitative accuracy reference.</p>
+</section>
+<section id="follow-on-directions" class="level3">
+<h3 class="anchored" data-anchor-id="follow-on-directions">Follow-On Directions</h3>
+<p>A direct extension is to correct the top-to-bottom-of-atmosphere shift on-footprint by retrieving L1C for the same scenes from a second catalog (for example <a href="https://element84.com">Element 84</a>’s earth-search or the Copernicus Data Space), enabling a controlled measurement of how much of the confidence shift is atmospheric rather than structural. The confidence analysis could be sharpened with margin- or entropy-based out-of-distribution signals and a reliability (calibration) curve against a reference land-cover product such as <a href="https://esa-worldcover.org">ESA WorldCover</a>, which would also supply the quantitative accuracy this study omits. The scene comparison could be broadened to disentangle chip homogeneity from biome resemblance by holding one fixed while varying the other. Finally, fine-tuning on surface-reflectance or mixed-tile data would convert the study from a characterization of benchmark-to-operational transfer into an attempt to close it.</p>
 
 
+</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>P. Helber, B. Bischke, A. Dengel, and D. Borth, “EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification,” <em>IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing</em>, vol.&nbsp;12, no. 7, pp.&nbsp;2217–2226, 2019, <a href="https://doi.org/10.1109/JSTARS.2019.2918242">doi:10.1109/JSTARS.2019.2918242</a>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>A. J. Stewart, C. Robinson, I. A. Corley, A. Ortiz, J. M. Lavista Ferres, and A. Banerjee, “TorchGeo: Deep Learning With Geospatial Data,” in <em>Proc. 30th Int. Conf. on Advances in Geographic Information Systems (SIGSPATIAL ’22)</em>, pp.&nbsp;133-144, 2022, <a href="https://doi.org/10.1145/3557915.3560953">doi:10.1145/3557915.3560953</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>D. Hendrycks and K. Gimpel, “A Baseline for Detecting Misclassified and Out-of-Distribution Examples in Neural Networks,” in <em>Int. Conf. on Learning Representations (ICLR)</em>, 2017, <a href="https://arxiv.org/abs/1610.02136">arXiv:1610.02136</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

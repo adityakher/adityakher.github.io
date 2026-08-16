@@ -82,13 +82,13 @@ Developing and using a high-fidelity RCS model is one possible direction for adv
 
 ## Footnotes
 
-[^1]: D. A. Shnidman, “Determination of required SNR values \[radar detection\],” in *IEEE Transactions on Aerospace and Electronic Systems*, vol. 38, no. 3, pp. 1059-1064, July 2002, doi: [10.1109/TAES.2002.1039422](https://doi.org/10.1109/TAES.2002.1039422).
+[^1]: D. A. Shnidman, “Determination of required SNR values \[radar detection\],” in *IEEE Transactions on Aerospace and Electronic Systems*, vol. 38, no. 3, pp. 1059-1064, July 2002, [doi:10.1109/TAES.2002.1039422](https://doi.org/10.1109/TAES.2002.1039422).
 
 [^2]: M. I. Skolnik, *Introduction to Radar Systems*, 2nd ed. New York: McGraw-Hill, 1980.
 
 [^3]: G. T. Ruck, D. E. Barrick, W. D. Stuart, C. K. Krichbaum, *Radar Cross Section Handbook*. New York: Plenum Press, 1970.
 
-[^4]: M. Ezuma, C. K. Anjinappa, M. Funderburk and I. Guvenc, “Radar Cross Section Based Statistical Recognition of UAVs at Microwave Frequencies,” in *IEEE Transactions on Aerospace and Electronic Systems*, vol. 58, no. 1, pp. 27-46, Feb. 2022, doi: [10.1109/TAES.2021.3096875](https://doi.org/10.1109/TAES.2021.3096875).
+[^4]: M. Ezuma, C. K. Anjinappa, M. Funderburk and I. Guvenc, “Radar Cross Section Based Statistical Recognition of UAVs at Microwave Frequencies,” in *IEEE Transactions on Aerospace and Electronic Systems*, vol. 58, no. 1, pp. 27-46, Feb. 2022, [doi:10.1109/TAES.2021.3096875](https://doi.org/10.1109/TAES.2021.3096875).
 
 [^5]: R. M. O’Donnell, “Introduction to Radar Systems,” MIT Lincoln Laboratory. \[Online\]. Available: <https://www.ll.mit.edu/outreach/web-based-course-radar-introduction-radar-systems>. \[Accessed: May 11, 2026\].
 

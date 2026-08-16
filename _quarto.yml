@@ -18,6 +18,8 @@ website:
         menu:
           - text: Multistatic Radar
             href: radar.qmd
+          - text: Satellite Land Cover
+            href: eoml.qmd
     right:
       - text: "**CV**"
         href: files/AK_CV_full.pdf
