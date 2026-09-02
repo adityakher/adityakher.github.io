@@ -2,7 +2,7 @@ I’m an applied physicist and systems engineer experienced in both the quantum 
 
 I developed novel [superconducting](https://en.wikipedia.org/wiki/Superconductivity) sensor and amplifier technologies for astronomy instrumentation during my PhD at [Caltech](https://www.caltech.edu/), where I was a member of the second cohort of [NASA Space Technology Research Fellows](https://web.archive.org/web/20170705074149mp_/https://www.nasa.gov/directorates/spacetech/strg/2012_class.html) and shuttled between campus and the [Jet Propulsion Laboratory](https://www.jpl.nasa.gov/) for my research. Prior to the PhD I received an MS from Caltech and a BS from [UC San Diego](https://ucsd.edu/).
 
-Check out the pages describing my professional work relevant to [quantum](quantum.llms.md) and [defense](defense.llms.md), as well as my independent projects including a [radar detection performance model](radar.llms.md). You can also take a look at my full [CV](files/AK_CV_full.pdf).
+Check out the pages describing my professional work relevant to [quantum](quantum.llms.md) and [defense](defense.llms.md), as well as my independent projects. You can also take a look at my full [CV](files/AK_CV_full.pdf).
 
 When I’m not working, I’m typically reading [The Economist](https://www.economist.com/), watching an arthouse film at an [independent cinema](https://revivalhub.com/), or doing some spirited driving in the canyons of Southern California.
 
@@ -10,4 +10,4 @@ Feel free to reach out on [LinkedIn](https://www.linkedin.com/in/aditya-kher/) o
 
 ------------------------------------------------------------------------
 
-*Last updated: June 2026*
+*Last updated: September 2026*

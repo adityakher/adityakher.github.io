@@ -1,5 +1,5 @@
 ---
-title: "Benchmark Land-Cover Classification on Operational Sentinel-2 Imagery"
+title: "Land-Cover Classification on Operational Satellite Imagery"
 toc: true
 ---
 
