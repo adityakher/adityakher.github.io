@@ -16,9 +16,9 @@ website:
         text: Defense
       - text: Projects
         menu:
-          - text: Multistatic Radar
+          - text: "Multistatic Radar Detection Performance Model"
             href: radar.qmd
-          - text: Satellite Land Cover
+          - text: "Benchmark Land-Cover Classification on Operational Sentinel-2 Imagery"
             href: eoml.qmd
     right:
       - text: "**CV**"
