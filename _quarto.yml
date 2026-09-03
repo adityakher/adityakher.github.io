@@ -20,6 +20,8 @@ website:
             href: radar.qmd
           - text: "Land-Cover Classification on Operational Satellite Imagery"
             href: eoml.qmd
+          - text: "Evaluating Quantum Technologies for Mission Use"
+            href: quantum-evaluation.qmd
     right:
       - text: "**CV**"
         href: files/AK_CV_full.pdf
